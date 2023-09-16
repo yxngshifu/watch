@@ -1,42 +1,159 @@
-
-
-.header {
-  
-  display: flex;
-  
-  align-items: center;
-  justify-content: space-between;
-  
-  
+/* Reset default margin and padding for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
+/* Set a background color for the entire body */
+body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  color: #333; /* Default text color */
+}
 
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); 
-  padding: 20px;
-  align-items: center;
+/* Style for the header container */
+
+
+
+
+
+
+
+/* ... Previous CSS rules ... */
+
+/* Style for the hero section */
+.hero {
   
-}
-
-
-
-.movie-cover {
-  width: 100%;
-}
-
-.hero{
-  min-height: 500px;
-  background-position:top center;
   background-size: cover;
-  
+  background-position: center;
+  height: 400px;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Center-align content vertically */
+  align-items: center; /* Center-align content horizontally */
+  text-align: center;
+  color: white;
 }
-.hero-content{
-  color: aliceblue;
- width: Hug (404px);
-height: Hug (285px);
-top: 158px;
-left: 98px;
-gap: 16px;
+/* ... Previous CSS rules ... */
 
+/* Style for the search bar */
+/* Style for the search form to match the input box style */
+.hero .search form {
+  display: flex;
+  max-width: 400px;
+  border-radius: 10px;
+  background-color: #f0f0f0; /* Light gray background */
+  border: 2px solid #ccc; /* Gray border */
+  overflow: hidden;
 }
+
+.hero .search form input[type="text"] {
+  flex-grow: 1;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  outline: none;
+  background-color: transparent; /* Remove background color */
+}
+
+.hero .search form button[type="submit"] {
+  background-color: #0074D9;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease; /* Add a smooth transition */
+}
+
+.hero .search form button[type="submit"]:hover {
+  background-color: #0056A3; /* Darker blue on hover */
+}
+
+
+/* Style for the main content container */
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr); /* Create 4 rows */
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Style for individual movie cards */
+.movie-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Style for movie cover images */
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Style for movie titles */
+.movie-card h2 {
+  font-size: 20px;
+  margin: 10px;
+}
+
+/* Style for movie overview text */
+.movie-card p {
+  font-size: 16px;
+  margin: 10px;
+  color: #777;
+}
+
+/* Style for the hero section */
+.hero {
+ 
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  display: flex;
+  justify-content: center; /* Center-align content horizontally */
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+/* Style for the hero content */
+.hero-content {
+  padding: 20px;
+}
+
+/* Style for the h1 title in the hero section */
+.hero-content h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Style for the overview paragraph in the hero section */
+.hero-content p {
+  font-size: 18px;
+}
+
+/* Style for the footer */
+.footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
+
+/* Add more styles and rules as needed for your movie website */

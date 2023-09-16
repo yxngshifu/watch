@@ -47,7 +47,7 @@ function MovieDetails({ IMAGE_PATH }) {
       <p data-testid="movie-runtime">Runtime (minutes): {movie.runtime}</p>
       <p data-testid='vote-average'>{movie.vote_average}</p>
       <p data-testid="movie-overview">{movie.overview}</p>
-      <p data-testid='vote-average'>{movie.credits}</p>
+     
     </div>
   );
 }

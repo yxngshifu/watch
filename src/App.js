@@ -16,10 +16,10 @@ function App() {
 
   const toggleFavorite = (movie) => {
   if (favorites.includes(movie)) {
-    // If the movie is already in favorites, remove it
+    
     setFavorites(favorites.filter((fav) => fav.id !== movie.id));
   } else {
-    // If the movie is not in favorites, add it
+    
     setFavorites([...favorites, movie]);
   }
 };
@@ -34,7 +34,7 @@ function App() {
         },
       });
 
-      // Limit the number of movies to 10
+      
       const limitedResults = results.slice(0, 10);
 
       setSelectedMovie(limitedResults[0]);
@@ -51,14 +51,14 @@ function App() {
   };
 
   useEffect(() => {
-    fetchTopRatedMovies(); // Initial fetch without searchKey
+    fetchTopRatedMovies();
   }, []);
 
   const renderMovies = () => (
     movies.map(movie => (
       <MovieCard
         key={movie.id}
-        movie={movie} // Make sure to pass the limited movie data here
+        movie={movie} 
         toggleFavorite={() => toggleFavorite(movie)}
       />
     ))
@@ -73,19 +73,25 @@ function App() {
     <Router>
       <div className="App">
         <header className={"header"}>
-          <form onSubmit={searchMovies}>
+      
+        <div className="hero" style={{backgroundImage: `url('${IMAGE_PATH}/${selectedMovie.backdrop_path}')`}}>
+           <form onSubmit={searchMovies}>
             <input type="text" value={searchKey} onChange={(e) => setSearchKey(e.target.value)} placeholder="What do you want to watch?" />
             <button type="submit">Search</button>
           </form>
-        </header>
-        <div className="hero" style={{backgroundImage: `url('${IMAGE_PATH}/${selectedMovie.backdrop_path}')`}}>
           <div className="hero-content max-center">
             <h1>{selectedMovie.title}</h1>
             {selectedMovie.overview ? <p>{selectedMovie.overview}</p> :null}
           </div>
+
         </div>
-        <h1>Featured Movies</h1>
+          </header>
+          <div className="heading">
+          <h1 >Featured Movies</h1>
+          </div>
+        
         <Routes>
+          
           <Route path="/movie/:id" element={<MovieDetails IMAGE_PATH={IMAGE_PATH}/>} />
           <Route path="/" element={
             <div className="container">
