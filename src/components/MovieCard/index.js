@@ -8,9 +8,14 @@ function MovieCard({ movie }) {
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
   };
-
+  
   return (
-    <div data-testid="movie-card" className="movie-card">
+        
+       
+       
+        
+        <div data-testid="movie-card" className="movie-card">
+     
       <Link to={`/movie/${id}`}>
         <img
           data-testid="movie-poster"
@@ -23,7 +28,9 @@ function MovieCard({ movie }) {
       <button onClick={toggleFavorite}>
         {isFavorite ? "Unfavorite" : "Favorite"}
       </button>
+      
     </div>
+   
   );
 }
 

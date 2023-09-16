@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MovieCard from "./components/MovieCard";
 import './App.css'; 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
 import MovieDetails from "./components/MovieDetails";
+import YouTube from "react-youtube";
+import Hero from "./components/Hero/Hero";
 
 function App() {
   const IMAGE_PATH = "https://image.tmdb.org/t/p/w1280";
@@ -13,16 +15,31 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState({});
   const [searchKey, setSearchKey] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [playTrailer, setPlayTrailer] = useState(false);
 
   const toggleFavorite = (movie) => {
-  if (favorites.includes(movie)) {
-    
-    setFavorites(favorites.filter((fav) => fav.id !== movie.id));
-  } else {
-    
-    setFavorites([...favorites, movie]);
-  }
-};
+    if (favorites.includes(movie)) {
+      setFavorites(favorites.filter((fav) => fav.id !== movie.id));
+    } else {
+      setFavorites([...favorites, movie]);
+    }
+  };
+
+  // Function to fetch movie details including videos
+  const fetchMovieDetails = async (movieId) => {
+    try {
+      const { data } = await axios.get(`${API_URL}/movie/${movieId}`, {
+        params: {
+          api_key: API_KEY,
+          append_to_response: 'videos',
+        },
+      });
+      return data;
+    } catch (error) {
+      console.error("Error fetching movie details:", error);
+      return null;
+    }
+  };
 
   const fetchTopRatedMovies = async (searchKey = "") => {
     try {
@@ -34,12 +51,18 @@ function App() {
         },
       });
 
-      
       const limitedResults = results.slice(0, 10);
 
-      setSelectedMovie(limitedResults[0]);
-      setMovies(limitedResults);
-    } catch (error) {
+      // Fetch movie details for each movie, including trailers and videos
+      const moviesWithDetails = await Promise.all(
+        limitedResults.map(async (movie) => {
+          const data = await fetchMovieDetails(movie.id);
+          return data;
+        })
+      );
+
+      setMovies(moviesWithDetails);
+    } catch (error) { 
       if (error.response) {
         console.error("Error:", error.response.status, error.response.data);
       } else if (error.request) {
@@ -47,6 +70,16 @@ function App() {
       } else {
         console.error("Error:", error.message);
       }
+    }
+  };
+
+  const { id } = useParams();
+
+  const selectMovie = async (movie) => {
+    const data = await fetchMovieDetails(movie.id);
+    if (data) {
+      setSelectedMovie(data);
+      setPlayTrailer(false); // Reset playTrailer state
     }
   };
 
@@ -59,6 +92,7 @@ function App() {
       <MovieCard
         key={movie.id}
         movie={movie} 
+        selectMovie={() => selectMovie(movie)} // Pass movie object here
         toggleFavorite={() => toggleFavorite(movie)}
       />
     ))
@@ -69,34 +103,32 @@ function App() {
     fetchTopRatedMovies(searchKey);
   }
 
+  const renderTrailer = () => {
+    if (selectedMovie.videos && selectedMovie.videos.results) {
+      const trailer = selectedMovie.videos.results.find(vid => vid.type === 'Trailer');
+      if (trailer) {
+        return (
+          <YouTube videoId={trailer.key} />
+        );
+      }
+    }
+    return null;
+  };
+
   return (
     <Router>
       <div className="App">
-        <header className={"header"}>
-      
-        <div className="hero" style={{backgroundImage: `url('${IMAGE_PATH}/${selectedMovie.backdrop_path}')`}}>
-           <form onSubmit={searchMovies}>
-            <input type="text" value={searchKey} onChange={(e) => setSearchKey(e.target.value)} placeholder="What do you want to watch?" />
-            <button type="submit">Search</button>
-          </form>
-          <div className="hero-content max-center">
-            <h1>{selectedMovie.title}</h1>
-            {selectedMovie.overview ? <p>{selectedMovie.overview}</p> :null}
-          </div>
-
-        </div>
-          </header>
-          <div className="heading">
-          <h1 >Featured Movies</h1>
-          </div>
-        
+        {playTrailer && renderTrailer()}
         <Routes>
-          
-          <Route path="/movie/:id" element={<MovieDetails IMAGE_PATH={IMAGE_PATH}/>} />
+          <Route path="/movie/:id" element={<MovieDetails selectedMovie={selectedMovie} IMAGE_PATH={IMAGE_PATH} />} />
           <Route path="/" element={
-            <div className="container">
-              {renderMovies()}
-            </div>} />
+            <>
+              <Hero searchMovies={searchMovies} searchKey={searchKey} setSearchKey={setSearchKey} />
+              <div className="container">
+                {renderMovies()}
+              </div>
+            </>
+          } />
         </Routes>
       </div>
     </Router>
