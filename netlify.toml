@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build --if-present"
+  ignore_warnings = true
+
+[build.environment]
+  API_KEY = "e31c181561c78ddc082f76db470776f5"
