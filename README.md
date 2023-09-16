@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+Running the Movie App Locally
+To run this Movie App locally on your machine, follow these steps:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Prerequisites
+Before you begin, ensure you have the following software installed on your computer:
 
-## Available Scripts
+Node.js: You need Node.js to run the application.
+npm: npm is the Node.js package manager and comes bundled with Node.js.
+Clone the Repository
+Open your terminal (command prompt) and navigate to the directory where you want to clone the repository.
 
-In the project directory, you can run:
+Run the following command to clone the repository to your local machine:
 
-### `npm start`
+bash
+Copy code
+git clone https://github.com/yxngshifu/watch
+Replace your-username with your GitHub username.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Install Dependencies {axios,react-router-dom}
+Navigate to the project directory using the following command:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+bash
+Copy code
+cd movie-app
+Install the project dependencies using npm:
 
-### `npm test`
+bash
+Copy code
+npm install
+Configure API Key (if needed)
+If you are working with an API that requires an API key, you should add it to your project's environment variables. Create a .env file in the project root and add your API key as follows:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+plaintext
+Copy code
+REACT_APP_API_KEY=your-api-key
+Replace your-api-key with your actual API key. Ensure that you don't share your API key publicly; include .env in your .gitignore file.
 
-### `npm run build`
+Run the Application
+Once you have completed the above steps, you can run the Movie App locally:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Start the development server:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+bash
+Copy code
+npm start
+Open your web browser and go to http://localhost:3000/ to view the Movie App.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Using the Movie App
+You can search for movies by entering keywords in the search bar and clicking "Search."
+Click on a movie card to see more details.
+To favorite a movie, click the heart icon on the movie card. Click it again to remove it from your favorites.
+Stopping the Application
+To stop the development server and terminate the application, press Ctrl + C in the terminal where the server is running
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+API_KEY = 'e31c181561c78ddc082f76db470776f5';
