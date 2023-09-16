@@ -9,6 +9,7 @@ function MovieDetails({ IMAGE_PATH }) {
   const API_KEY = 'e31c181561c78ddc082f76db470776f5';
 
   const [movie, setMovie] = useState(null);
+   
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
