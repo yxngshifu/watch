@@ -73,7 +73,7 @@ function App() {
     }
   };
 
-  const { id } = useParams();
+  
 
   const selectMovie = async (movie) => {
     const data = await fetchMovieDetails(movie.id);
@@ -85,7 +85,7 @@ function App() {
 
   useEffect(() => {
     fetchTopRatedMovies();
-  }, []);
+  }, [fetchTopRatedMovies]);
 
   const renderMovies = () => (
     movies.map(movie => (
