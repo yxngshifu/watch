@@ -29,7 +29,7 @@ function MovieDetails({ IMAGE_PATH }) {
   }, [id]);
 
   if (!movie) {
-    // Render a loading message or return null while fetching data
+    
     return <div>Loading...</div>;
   }
 
