@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MovieCard from "./components/MovieCard";
-import './App.css'; 
-import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MovieDetails from "./components/MovieDetails";
 import YouTube from "react-youtube";
 import Hero from "./components/Hero/Hero";
@@ -62,18 +62,10 @@ function App() {
       );
 
       setMovies(moviesWithDetails);
-    } catch (error) { 
-      if (error.response) {
-        console.error("Error:", error.response.status, error.response.data);
-      } else if (error.request) {
-        console.error("No response received from the server.");
-      } else {
-        console.error("Error:", error.message);
-      }
+    } catch (error) {
+      console.error("Error fetching movies:", error);
     }
   };
-
-  
 
   const selectMovie = async (movie) => {
     const data = await fetchMovieDetails(movie.id);
@@ -85,14 +77,14 @@ function App() {
 
   useEffect(() => {
     fetchTopRatedMovies();
-  }, [fetchTopRatedMovies]);
+  }, []);
 
   const renderMovies = () => (
     movies.map(movie => (
       <MovieCard
         key={movie.id}
-        movie={movie} 
-        selectMovie={() => selectMovie(movie)} // Pass movie object here
+        movie={movie}
+        selectMovie={() => selectMovie(movie)}
         toggleFavorite={() => toggleFavorite(movie)}
       />
     ))
@@ -121,14 +113,17 @@ function App() {
         {playTrailer && renderTrailer()}
         <Routes>
           <Route path="/movie/:id" element={<MovieDetails selectedMovie={selectedMovie} IMAGE_PATH={IMAGE_PATH} />} />
-          <Route path="/" element={
-            <>
-              <Hero searchMovies={searchMovies} searchKey={searchKey} setSearchKey={setSearchKey} />
-              <div className="container">
-                {renderMovies()}
-              </div>
-            </>
-          } />
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero searchMovies={searchMovies} searchKey={searchKey} setSearchKey={setSearchKey} />
+                <div className="container">
+                  {renderMovies()}
+                </div>
+              </>
+            }
+          />
         </Routes>
       </div>
     </Router>
